@@ -10,7 +10,6 @@ let vvue = new Vue({
   methods: {
     inputing(e) {
       //   console.log(e);
-
       if (this.workFor >= 120) {
         this.workFor = 120;
       }
@@ -21,26 +20,31 @@ let vvue = new Vue({
       if (this.workFor === 0 || this.workFor === "") {
         alert("沒有努力專心的寶貝是不能成為番茄寶貝的!");
       } else {
-        // input Minute
-        // let inputMin = 1;
-
-        // to sec
         let inputSec = this.workFor * 60;
 
-        let counter = function (sec) {
+        // let countDownHour = this.countDownHour;
+        // let countDownMin = this.countDownMin;
+        // let countDownSec = this.countDownSec;
+
+        let counter = (sec) => {
           let hours;
           let mins;
           let secs;
           let countDown = setInterval(() => {
+            // this is window object!!!!
+            // console.log("this is ", this);
+            // clearInterval(countDown);
+            console.log("it is ", this);
+
             hours = ~~(sec / 3600);
-            // console.log(hours);
-            this.countDownHour = hours.toString;
+            this.countDownHour = hours;
+            // console.log(countDownHour);
             mins = ~~((sec % 3600) / 60);
-            // console.log(mins);
-            this.countDownMin = mins.toString;
+            this.countDownMin = mins;
+            // console.log(countDownMin);
             secs = ~~(sec % 60);
-            // console.log(secs);
-            this.countDownSec = secs.toString;
+            this.countDownSec = secs;
+            // console.log(countDownSec);
             sec -= 1;
             if (sec < 0) {
               clearInterval(countDown);

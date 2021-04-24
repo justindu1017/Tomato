@@ -15,7 +15,7 @@ let vvue = new Vue({
         this.workFor = 120;
       }
 
-      this.restFor = Math.round((this.workFor / 4) * 10) / 10;
+      this.restFor = Math.round(((this.workFor + 2) / 4) * 10) / 10;
     },
     startCountDown() {
       if (this.workFor === 0 || this.workFor === "") {

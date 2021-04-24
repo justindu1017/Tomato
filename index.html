@@ -22,6 +22,12 @@
       integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
       crossorigin="anonymous"
     ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-vue/2.21.2/bootstrap-vue.min.js"
+      integrity="sha512-Z0dNfC81uEXC2iTTXtE0rM18I3ATkwn1m8Lxe0onw/uPEEkCmVZd+H8GTeYGkAZv50yvoSR5N3hoy/Do2hNSkw=="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="css/style.css" />
     <link rel="icon" type="image/png" href="img/tomato.png" />
     <title>番茄寶貝</title>
@@ -33,34 +39,41 @@
         id="container"
         class="border border-5 p-3 h-100 container d-flex flex-column"
       >
-        <div class="row">
-          <div class="col-lg-4 text-lg-end">寶貝想專心多久ㄋ寶貝:</div>
-          <div class="col-lg-4">
+        <div class="row flex-column flex-lg-row">
+          <div class="col col-lg-4 text-lg-end">寶貝想專心多久ㄋ寶貝:</div>
+          <div class="col-lg-4 col">
             <input
-              class="form-control"
+              class="form-control col"
               type="number"
               @keyup="inputing($event)"
               v-model="workFor"
             />
           </div>
 
-          <div class="col-lg-4 text-lg-start">分鐘的說</div>
+          <div class="col-lg-4 text-lg-start col">分鐘的說</div>
         </div>
-        <div class="row justify-content-center">
-          <div class="col-lg-4 text-lg-end">看來寶貝可以休息</div>
-          <div class="col-lg-1 text-lg-center text-break">{{ restFor }}</div>
-          <div class="col-lg-4 text-lg-start">分鐘唷~~</div>
-          <!-- </div> -->
+        <div class="row justify-content-center flex-column flex-lg-row">
+          <div class="col-lg-4 text-lg-end col">看來寶貝可以休息</div>
+          <div class="col-lg-1 text-lg-center text-break col">
+            {{ restFor }}
+          </div>
+          <div class="col-lg-4 text-lg-start col">分鐘唷~~</div>
         </div>
-        <div class="row">
-          <div class="col-lg-6 row m-0 p-0 justify-content-center">
+        <div class="row flex-lg-row flex-row">
+          <div class="col col-lg-6 row m-0 p-0 justify-content-center">
             <button class="col-lg-6 btn btn-primary" @click="startCountDown">
               開始寶貝
             </button>
           </div>
 
-          <div class="col-lg-6 row m-0 p-0 justify-content-center">
-            <button class="col-lg-6 btn btn-danger" disabled="true">
+          <div class="col col-lg-6 row m-0 p-0 justify-content-center">
+            <button
+              class="col-lg-6 btn btn-danger"
+              disabled="true"
+              id="cancelBtn"
+              data-bs-toggle="modal"
+              data-bs-target="#cancelModal"
+            >
               取消寶貝
             </button>
           </div>
@@ -68,13 +81,52 @@
         <div
           class="row justify-content-center flex-grow-1 align-content-center"
         >
-          <div class="col-lg-1 text-lg-center p-0 fs-1">
+          <div class="col-2 text-center col-lg-1 text-lg-center p-0 fs-1">
             {{ countDownHour }}
           </div>
-          <div class="col-lg-auto text-lg-center p-0 fs-1">:</div>
-          <div class="col-lg-1 text-lg-center p-0 fs-1">{{ countDownMin }}</div>
-          <div class="col-lg-auto text-lg-center p-0 fs-1">:</div>
-          <div class="col-lg-1 text-lg-center p-0 fs-1">{{ countDownSec }}</div>
+          <div class="col-1 text-center col-lg-auto text-lg-center p-0 fs-1">
+            :
+          </div>
+          <div class="col-2 text-center col-lg-1 text-lg-center p-0 fs-1">
+            {{ countDownMin }}
+          </div>
+          <div class="col-1 text-center col-lg-auto text-lg-center p-0 fs-1">
+            :
+          </div>
+          <div class="col-2 text-center col-lg-1 text-lg-center p-0 fs-1">
+            {{ countDownSec }}
+          </div>
+        </div>
+
+        <div
+          class="modal fade"
+          data-bs-backdrop="static"
+          data-bs-keyboard="false"
+          id="cancelModal"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header bg-primary">
+                <h5>真的嗎</h5>
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+              </div>
+              <div class="modal-body row align-content-center">
+                <p>真的不當番茄寶貝呢嗎QAQ</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-primary" data-bs-dismiss="modal">
+                  番茄！
+                </button>
+                <button
+                  class="btn btn-danger"
+                  @click="cancelTiming"
+                  data-bs-dismiss="modal"
+                >
+                  番茄QAQ
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -22,6 +22,7 @@ let vvue = new Vue({
         alert("沒有努力專心的寶貝是不能成為番茄寶貝的!");
       } else {
         $("#cancelBtn").attr("disabled", false);
+        $("#startBtn").attr("disabled", true);
 
         let inputSec = this.workFor * 60;
 
@@ -49,7 +50,10 @@ let vvue = new Vue({
             // this.countDownSec = secs;
 
             sec -= 1;
-            if (sec < 0) {
+            if (sec < -1) {
+              $("#startBtn").attr("disabled", false);
+              $("#cancelBtn").attr("disabled", true);
+
               this.workFor = "";
               this.restFor = 0;
               this.countDownSec = "00";
@@ -69,6 +73,7 @@ let vvue = new Vue({
       }
     },
     cancelTiming() {
+      $("#startBtn").attr("disabled", false);
       $("#cancelBtn").attr("disabled", true);
       clearInterval(this.countDown);
       this.workFor = "";
